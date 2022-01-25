@@ -87,10 +87,10 @@ function lib:Add(templateName, templateType)
 
 	local xOffset = 4 + #buttons * 32;
 
-	-- local button = WorldMapFrame:AddOverlayFrame(templateName, templateType, "TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -xOffset, -2);
-	local button = CreateFrame(templateType, nil, WorldMapFrame, templateName);
-	button:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -xOffset, -2);
-	button.relativeFrame = WorldMapFrame:GetCanvasContainer();
+	local button = WorldMapFrame:AddOverlayFrame(templateName, templateType, "TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -xOffset, -2);
+	-- local button = CreateFrame(templateType, nil, WorldMapFrame, templateName);
+	-- button:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -xOffset, -2);
+	-- button.relativeFrame = WorldMapFrame:GetCanvasContainer();
 
 	tinsert(buttons, button);
 
