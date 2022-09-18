@@ -34,10 +34,9 @@ local function SetPoints()
 	end
 end
 
-local hookedDefaultButtons;
 local function HookDefaultButtons()
 	if WorldMapFrame.overlayFrames == nil then
-		hookedDefaultButtons = true;
+		lib.HookedDefaultButtons = true;
 		return;
 	end
 
@@ -52,11 +51,9 @@ local function HookDefaultButtons()
         end
     end
 
-	hookedDefaultButtons = true;
+	lib.HookedDefaultButtons = true;
 end
 
-local isWrathClassic;
-local patchedWrathClassic;
 local function PatchWrathClassic()
 	if WorldMapFrame.RefreshOverlayFrames ~= nil then
 		return;
@@ -65,8 +62,8 @@ local function PatchWrathClassic()
 	WorldMapFrame.RefreshOverlayFrames = function()
 	end
 	
-	isWrathClassic = true;
-	patchedWrathClassic = true;
+	lib.IsWrathClassic = true;
+	lib.PatchedWrathClassic = true;
 end
 
 function lib:Add(templateName, templateType)
@@ -74,21 +71,23 @@ function lib:Add(templateName, templateType)
 		lib.buttons = {};
 	end
 
-	if not hookedDefaultButtons then
+	if not lib.HookedDefaultButtons then
 		HookDefaultButtons();
 	end
 
-	if not patchedWrathClassic then
+	if not lib.PatchedWrathClassic then
 		PatchWrathClassic();
 	end
 
 	local xOffset = 4 + #lib.buttons * 32;
 
 	-- local button = WorldMapFrame:AddOverlayFrame(templateName, templateType, "TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -xOffset, -2);
-	local button = CreateFrame(templateType, nil, WorldMapFrame, templateName);
+	NumKrowi_WorldMapButtons = NumKrowi_WorldMapButtons or 1;
+	local button = CreateFrame(templateType, "Krowi_WorldMapButtons" .. NumKrowi_WorldMapButtons, WorldMapFrame, templateName);
+	NumKrowi_WorldMapButtons = NumKrowi_WorldMapButtons + 1;
 	button:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -xOffset, -2);
 	button.relativeFrame = WorldMapFrame:GetCanvasContainer();
-	hooksecurefunc(WorldMapFrame, isWrathClassic and "OnMapChanged" or "RefreshOverlayFrames", function()
+	hooksecurefunc(WorldMapFrame, lib.IsWrathClassic and "OnMapChanged" or "RefreshOverlayFrames", function()
 		button:Refresh();
 		SetPoints();
 	end);
