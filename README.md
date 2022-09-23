@@ -1,3 +1,7 @@
+<a href="https://www.curseforge.com/wow/addons/krowis-world-map-buttons" alt="Curseforge">
+  <img src="https://img.shields.io/badge/Curseforge-Krowi's%20World%20Map%20Buttons-orange" />
+</a>
+
 ## Purpose
 This library was created to make adding buttons to the world map easier and less dependant on other addons.
 Using this library will add a button to the top right of the map window from right to left in the order the addons are loaded.
