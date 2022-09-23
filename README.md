@@ -1,3 +1,12 @@
+## Purpose
+This library was created to make adding buttons to the world map easier and less dependant on other addons.
+Using this library will add a button to the top right of the map window from right to left in the order the addons are loaded.
+When yours or other addon's buttons are hidden, the rest will shift to the right to fill the gap dynamically.
+
+Supports both Retail and Wrath Classic. Classic and TBC Classic are not verified. See [test](#important)
+
+See the examples below on how to use the library.
+
 ## Important
 ### Retail
 `frameStrata="HIGH"`
