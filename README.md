@@ -1,23 +1,16 @@
-**Support me**
-<br>
-<br>
+## Support me
 <a href="https://www.paypal.com/donate/?hosted_button_id=NYWTBA4XM6ZS6" alt="Paypal">
   <img src="https://www.paypalobjects.com/en_US/BE/i/btn/btn_donateCC_LG.gif" />
 </a>
-<br>
-<br>
 <a href="https://www.patreon.com/Krowi" alt="Patreon">
   <img src="https://raw.githubusercontent.com/codebard/patron-button-and-widgets-by-codebard/master/images/become_a_patron_button.png" />
 </a>
-<br>
-<br>
 <a href='https://ko-fi.com/E1E6G64LS' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
+## Purpose
 <a href="https://www.curseforge.com/wow/addons/krowis-world-map-buttons" alt="Curseforge">
   <img src="https://img.shields.io/badge/Curseforge-Krowi's%20World%20Map%20Buttons-orange" />
-</a>
-
-## Purpose
+</a><br>
 This library was created to make adding buttons to the world map easier and less dependant on other addons.
 Using this library will add a button to the top right of the map window from right to left in the order the addons are loaded.
 When yours or other addon's buttons are hidden, the rest will shift to the right to fill the gap dynamically.
