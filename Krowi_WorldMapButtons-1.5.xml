@@ -19,5 +19,5 @@
  -->
 
 <Ui>
-	<Script file="Krowi_WorldMapButtons-1.4.lua"/>
+	<Script file="Krowi_WorldMapButtons-1.5.lua"/>
 </Ui>

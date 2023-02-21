@@ -19,7 +19,7 @@
 		the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 3);
+local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.5', 3);
 
 if not lib then
 	return;
@@ -123,6 +123,11 @@ function lib:Add(templateName, templateType)
 	end
 
 	self.NumButtons = self.NumButtons + 1;
-	local button = CreateFrame(templateType, "Krowi_WorldMapButtons" .. self.NumButtons, WorldMapFrame, templateName);
+	local button = CreateFrame(templateType, "Krowi_WorldMapButtons" .. self.NumButtons, lib.IsWrathClassic and WorldMapFrame.ScrollContainer or WorldMapFrame, templateName);
+
+	if lib.IsWrathClassic then
+		button:SetFrameStrata("TOOLTIP");
+	end
+
 	return AddButton(button);
 end
