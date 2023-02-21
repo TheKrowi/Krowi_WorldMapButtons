@@ -19,11 +19,16 @@
 		the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.5', 3);
+local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.5', 1);
 
 if not lib then
 	return;
 end
+
+local version = (GetBuildInfo());
+local major = string.match(version, "(%d+)%.(%d+)%.(%d+)(%w?)");
+lib.IsWrathClassic = major == "3";
+lib.IsDragonflightRetail = major == "10";
 
 local AddButton;
 local function Fix1_3_1Buttons()
@@ -41,6 +46,21 @@ local function Fix1_3_1Buttons()
 	Fix1_3_1Buttons = function() end;
 end
 
+local function Fix1_4_1Buttons()
+	local old = LibStub("Krowi_WorldMapButtons-1.4", true);
+	print(old, lib.IsWrathClassic)
+	if old and lib.IsWrathClassic then
+		for _, button in next, old.Buttons do
+			button:SetParent(WorldMapFrame.ScrollContainer);
+			button:SetFrameStrata("TOOLTIP");
+			AddButton(button);
+		end
+		old.Buttons = {};
+	end
+
+	Fix1_4_1Buttons = function() end;
+end
+
 lib.XOffset, lib.YOffset = 4, -2;
 function lib:SetOffsets(xOffset, yOffset)
 	self.XOffset = xOffset or self.XOffset;
@@ -49,9 +69,11 @@ end
 
 function lib.SetPoints()
 	Fix1_3_1Buttons();
+	Fix1_4_1Buttons();
 
 	local xOffset = lib.XOffset;
 	for _, button in next, lib.Buttons do
+		print(xOffset)
 		if button:IsShown() then
 			button:SetPoint("TOPRIGHT", button.relativeFrame, -xOffset, lib.YOffset);
 			xOffset = xOffset + 32;
@@ -80,15 +102,12 @@ local function HookDefaultButtons()
 end
 
 local function PatchWrathClassic()
-	if WorldMapFrame.RefreshOverlayFrames ~= nil then
-		return;
+	if lib.IsWrathClassic and WorldMapFrame.RefreshOverlayFrames == nil then
+		WorldMapFrame.RefreshOverlayFrames = function()
+		end
 	end
 
-	WorldMapFrame.RefreshOverlayFrames = function()
-	end
-	
-	lib.IsWrathClassic = true;
-	lib.PatchedWrathClassic = true;
+	PatchWrathClassic = function() end;
 end
 
 function AddButton(button)
@@ -118,9 +137,7 @@ function lib:Add(templateName, templateType)
 		HookDefaultButtons();
 	end
 
-	if not self.PatchedWrathClassic then
-		PatchWrathClassic();
-	end
+	PatchWrathClassic();
 
 	self.NumButtons = self.NumButtons + 1;
 	local button = CreateFrame(templateType, "Krowi_WorldMapButtons" .. self.NumButtons, lib.IsWrathClassic and WorldMapFrame.ScrollContainer or WorldMapFrame, templateName);
