@@ -48,7 +48,6 @@ end
 
 local function Fix1_4_1Buttons()
 	local old = LibStub("Krowi_WorldMapButtons-1.4", true);
-	print(old, lib.IsWrathClassic)
 	if old and lib.IsWrathClassic then
 		for _, button in next, old.Buttons do
 			button:SetParent(WorldMapFrame.ScrollContainer);
@@ -73,7 +72,6 @@ function lib.SetPoints()
 
 	local xOffset = lib.XOffset;
 	for _, button in next, lib.Buttons do
-		print(xOffset)
 		if button:IsShown() then
 			button:SetPoint("TOPRIGHT", button.relativeFrame, -xOffset, lib.YOffset);
 			xOffset = xOffset + 32;
