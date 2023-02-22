@@ -46,6 +46,7 @@ local function Fix1_3_1Buttons()
 	Fix1_3_1Buttons = function() end;
 end
 
+local xOffsetDefault, yOffsetDefault = 4, -2;
 local function Fix1_4_1Buttons()
 	local old = LibStub("Krowi_WorldMapButtons-1.4", true);
 	if old and lib.IsWrathClassic then
@@ -57,13 +58,17 @@ local function Fix1_4_1Buttons()
 		old.Buttons = {};
 	end
 
-	lib.XOffset = old.XOffset;
-	lib.YOffset = old.YOffset;
+	if old.XOffset ~= xOffsetDefault then
+		lib.XOffset = old.XOffset;
+	end
+	if old.YOffset ~= yOffsetDefault then
+		lib.YOffset = old.YOffset;
+	end
 
 	Fix1_4_1Buttons = function() end;
 end
 
-lib.XOffset, lib.YOffset = 4, -2;
+lib.XOffset, lib.YOffset = xOffsetDefault, yOffsetDefault;
 function lib:SetOffsets(xOffset, yOffset)
 	self.XOffset = xOffset or self.XOffset;
 	self.YOffset = yOffset or self.YOffset;
