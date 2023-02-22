@@ -57,6 +57,9 @@ local function Fix1_4_1Buttons()
 		old.Buttons = {};
 	end
 
+	lib.XOffset = old.XOffset;
+	lib.YOffset = old.YOffset;
+
 	Fix1_4_1Buttons = function() end;
 end
 
