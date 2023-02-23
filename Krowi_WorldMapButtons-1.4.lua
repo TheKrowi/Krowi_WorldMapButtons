@@ -19,8 +19,7 @@
 		the copyright holders.
 ]]
 
-local lib, old = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 4);
-print(lib, old)
+local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 4);
 
 if not lib then
 	return;
@@ -50,7 +49,6 @@ end
 local function Fix1_4_3Buttons()
 	if lib.IsWrathClassic then
 		for _, button in next, lib.Buttons do
-			print(button)
 			button:SetParent(WorldMapFrame.ScrollContainer);
 			button:SetFrameStrata("TOOLTIP");
 		end
