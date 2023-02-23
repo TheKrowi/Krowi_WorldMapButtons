@@ -19,7 +19,8 @@
 		the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.5', 1);
+local lib, old = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 4);
+print(lib, old)
 
 if not lib then
 	return;
@@ -46,29 +47,19 @@ local function Fix1_3_1Buttons()
 	Fix1_3_1Buttons = function() end;
 end
 
-local xOffsetDefault, yOffsetDefault = 4, -2;
-local function Fix1_4_1Buttons()
-	local old = LibStub("Krowi_WorldMapButtons-1.4", true);
-	if old and lib.IsWrathClassic then
-		for _, button in next, old.Buttons do
+local function Fix1_4_3Buttons()
+	if lib.IsWrathClassic then
+		for _, button in next, lib.Buttons do
+			print(button)
 			button:SetParent(WorldMapFrame.ScrollContainer);
 			button:SetFrameStrata("TOOLTIP");
-			AddButton(button);
 		end
-		old.Buttons = {};
 	end
 
-	if old.XOffset ~= xOffsetDefault then
-		lib.XOffset = old.XOffset;
-	end
-	if old.YOffset ~= yOffsetDefault then
-		lib.YOffset = old.YOffset;
-	end
-
-	Fix1_4_1Buttons = function() end;
+	Fix1_4_3Buttons = function() end;
 end
 
-lib.XOffset, lib.YOffset = xOffsetDefault, yOffsetDefault;
+lib.XOffset, lib.YOffset = 4, -2;
 function lib:SetOffsets(xOffset, yOffset)
 	self.XOffset = xOffset or self.XOffset;
 	self.YOffset = yOffset or self.YOffset;
@@ -76,7 +67,7 @@ end
 
 function lib.SetPoints()
 	Fix1_3_1Buttons();
-	Fix1_4_1Buttons();
+	Fix1_4_3Buttons();
 
 	local xOffset = lib.XOffset;
 	for _, button in next, lib.Buttons do
