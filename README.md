@@ -45,9 +45,6 @@ addon.WorldMapButtons = LibStub("Krowi_WorldMapButtons-1.4"); -- Global world ma
 
 function worldMapButton.Load()
     worldMapButton = addon.WorldMapButtons:Add("KrowiAF_WorldMapButton_Template", "BUTTON");
-    if addon.IsWrathClassic() then
-        worldMapButton:SetFrameStrata("TOOLTIP");
-    end
     addon.GUI.WorldMapButton = worldMapButton;
 end
 ```
