@@ -18,7 +18,7 @@
 		the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 5);
+local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 6);
 
 if not lib then
 	return;
@@ -29,24 +29,12 @@ local major = string.match(version, "(%d+)%.(%d+)%.(%d+)(%w?)");
 lib.IsClassic = major == "1";
 lib.IsTbcClassic = major == "2";
 lib.IsWrathClassic = major == "3";
-lib.IsDragonflightRetail = major == "10";
 lib.HasNoOverlay = lib.IsClassic or lib.IsTbcClassic or lib.IsWrathClassic;
+lib.IsDragonflight = major == "10";
+lib.IsTheWarWithin = major == "11";
+lib.IsMainline = lib.IsDragonflight or lib.IsTheWarWithin;
 
 local AddButton;
-local function Fix1_3_1Buttons()
-	local old = LibStub("Krowi_WorldMapButtons-1.3", true);
-	if old then
-		local children = { WorldMapFrame:GetChildren() };
-		for i, child in ipairs(children) do
-			local p, _, rp, x, y = child:GetPoint(1);
-			if x and y and x <= -68 and y == -2 and child:GetName() == nil then
-				AddButton(child);
-			end
-		end
-	end
-
-	Fix1_3_1Buttons = function() end;
-end
 
 local function Fix1_4_3Buttons()
 	if lib.HasNoOverlay then
@@ -66,7 +54,6 @@ function lib:SetOffsets(xOffset, yOffset)
 end
 
 function lib.SetPoints()
-	Fix1_3_1Buttons();
 	Fix1_4_3Buttons();
 
 	local xOffset = lib.XOffset;
@@ -93,6 +80,10 @@ local function HookDefaultButtons()
 			f.KrowiWorldMapButtonsIndex = #lib.Buttons;
 			tinsert(lib.Buttons, f);
         end
+		if WorldMapShowLegendButtonMixin and f.OnLoad == WorldMapShowLegendButtonMixin.OnLoad then
+			f.KrowiWorldMapButtonsIndex = #lib.Buttons;
+			tinsert(lib.Buttons, f);
+		end
     end
 
 	lib.HookedDefaultButtons = true;
