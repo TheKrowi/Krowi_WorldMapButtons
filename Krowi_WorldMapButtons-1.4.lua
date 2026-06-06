@@ -14,7 +14,7 @@
 
 ---@diagnostic disable: undefined-global
 
-local lib, oldminor = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 9);
+local lib, oldminor = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 10);
 
 if not lib then
 	return;
@@ -67,15 +67,6 @@ local function HookDefaultButtons()
 	lib.HookedDefaultButtons = true;
 end
 
-local function PatchWrathClassic()
-	if lib.HasNoOverlay and WorldMapFrame.RefreshOverlayFrames == nil then
-		WorldMapFrame.RefreshOverlayFrames = function()
-		end
-	end
-
-	PatchWrathClassic = function() end;
-end
-
 local function AddButton(button)
 	local xOffset, yOffset;
 	if lib.IsMainline then
@@ -85,7 +76,7 @@ local function AddButton(button)
 	end
 	button.relativeFrame = WorldMapFrame:GetCanvasContainer();
 	button:SetPoint("TOPRIGHT", button.relativeFrame, lib.IsMainline and -lib.XOffset or -xOffset, lib.IsMainline and yOffset or lib.YOffset);
-	hooksecurefunc(WorldMapFrame, lib.HasNoOverlay and "OnMapChanged" or "RefreshOverlayFrames", function()
+	hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
 		button:Refresh();
 		lib.SetPoints();
 	end);
@@ -103,8 +94,6 @@ function lib:Add(templateName, templateType)
 	if not self.HookedDefaultButtons then
 		HookDefaultButtons();
 	end
-
-	PatchWrathClassic();
 
 	local button = CreateFrame(templateType, "Krowi_WorldMapButtons" .. (#self.Buttons + 1), lib.HasNoOverlay and WorldMapFrame.ScrollContainer or WorldMapFrame, templateName);
 
