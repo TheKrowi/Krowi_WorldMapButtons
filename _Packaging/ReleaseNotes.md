@@ -1,18 +1,5 @@
-### Added
-- Wrath Classic compatibility
+### Fixed (1.4.10)
+- Taint fix: removed `PatchWrathClassic` patch, hook now always uses `OnMapChanged` (dev note: this is at least an attempt at fixing `Blizzard_SharedXML/LayoutFrame.lua:491: attempt to compare a secret number value`)
 
-### Fixed (1.4.4)
-- Proper compatibility fix for Leatrix Maps with backwards compatibility
-
-### Added (1.4.5)
-- Classic era and TBC classic support
-
-### Changed (1.4.6)
-- The War Within compatibility
-- No longer compatible with Krowi_WorldMapButtons 1.3.1
-
-### Changed (1.4.8)
-- 11.1.0 map changes
-
-### Changed (1.4.9)
-- Codebase for upload
+### Changed (1.4.10)
+- Files renamed to be in line with my other libraries
