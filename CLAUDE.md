@@ -6,7 +6,7 @@ There is no build, lint or test step: the game, through a consumer, is the test 
 
 ## Clients and loading
 
-- One TOC, `Krowi_WorldMapButtons.toc`: `## Interface: 120100, 50504, 11509, 16001, 38002` (Retail 12.1.0, Mists 5.5.4, Era 1.15.9, WoW Forever 1.60.1, Titan 3.80.2; not Anniversary). It counts only for a standalone install, the README badges and the upload game versions.
+- One TOC, `Krowi_WorldMapButtons.toc`: `## Interface: 120105, 50504, 11509, 16001, 38002` (Retail 12.1.5, Mists 5.5.4, Era 1.15.9, WoW Forever 1.60.1, Titan 3.80.2; not Anniversary). It counts only for a standalone install, the README badges and the upload game versions.
 - All code is in `Krowi_WorldMapButtons.lua`; the TOC loads `Krowi_WorldMapButtons.xml`, which only loads that file. `_Packaging/ButtonTemplate.xml` is a sample template for consumers and is never loaded. LibStub is not bundled: an embedding addon provides it.
 - The client comes from the major version of `GetBuildInfo()` and whether `WorldMapTrackingPinButtonMixin` exists (`:14-27`):
 
@@ -82,5 +82,3 @@ No Krowi addon loads the library on Forever or Era: only RareScanner (minor 11) 
 ## Known debt (verified 2026-10-17)
 
 - Mists adopts Blizzard's zone timer into the row. In the Classic FrameXML `WorldMapTrackingOptionsButtonMixin` has no `OnLoad` (`Blizzard_WorldMap/Blizzard_WorldMapTemplates.lua:43`), so `IsTrackingOptionsButton` (`:53-55`) is true for every overlay frame without one, including the zone timer (`WorldMapZoneTimerMixin`, always shown, normally at the bottom of the map). `SetPoints` then moves it to the top right and pushes the addon buttons one slot left. Krowi_AchievementFilter's spec (`docs/work/2026-10-02-classic-world-map-button/spec.md:22`) says the floor dropdown is adopted too, but by the source it gets an `OnLoad` from `WowStyle1DropdownMixin` (`Blizzard_Menu/MenuTemplates.lua:764`); confirm in game.
-- `README.md` on GitHub describes the library before 1.4.10 until the next release regenerates it from `_Packaging/Description.md`, which was brought up to date on 2026-10-24.
-- `## Interface:` Retail 120100 lags 12.1.5 (120105).

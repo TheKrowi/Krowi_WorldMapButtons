@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.4.12
+## 1.4.12 - 2026-10-24
 ### Changed
 - The library is now licensed under the BSD 3-clause license, which also covers every earlier 1.4 release: any version can be embedded in an addon without asking
 
