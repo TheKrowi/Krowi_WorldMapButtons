@@ -163,3 +163,6 @@ This ensures buttons update correctly when:
 
 ## Requirements
 - LibStub
+
+## License
+BSD 3-clause, see [LICENSE](https://github.com/TheKrowi/Krowi_WorldMapButtons/blob/main/LICENSE). It covers every 1.4 release, including those before 1.4.12.

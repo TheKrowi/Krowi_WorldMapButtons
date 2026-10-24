@@ -77,6 +77,7 @@ No Krowi addon loads the library on Forever or Era: only RareScanner (minor 11) 
 - The addon manager writes `README.md` (badges from the TOC's `## Interface:` plus `_Packaging/Description.md`) and `_Packaging/ReleaseNotes.md` (only the newest changelog entry, with the version added to each heading). Edit `_Packaging/Description.md` and `_Packaging/Changelog.md`.
 - The changelog's readers are addon authors: entries name the API and the frames they touch.
 - After a release, bump `Libs/Krowi_WorldMapButtons` in Krowi_AchievementFilter.
+- License: BSD 3-clause, like Ace3, declared to cover every 1.4 release (Krowi, 2026-10-24, after another author asked on Discord). From 1.4.9 to 1.4.11 the `LICENSE` said only "All Rights Reserved" and granted nothing; up to 1.4.8 the Lua header carried a custom "free to use" grant. Krowi chose BSD over a custom no-reupload license so GPL and AGPL addons can embed it too. The other Krowi libraries stay All Rights Reserved.
 
 ## Known debt (verified 2026-10-17)
 
