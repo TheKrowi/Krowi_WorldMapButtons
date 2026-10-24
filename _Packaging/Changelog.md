@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.4.12
+### Changed
+- The library is now licensed under the BSD 3-clause license, which also covers every earlier 1.4 release: any version can be embedded in an addon without asking
+
 ## 1.4.11 - 2026-10-03
 ### Added
 - WoW Forever support: buttons stack downwards from the top-left corner of the map, below Blizzard's map pin button, and the tracking options button stays next to the nav bar
