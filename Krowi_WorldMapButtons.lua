@@ -5,7 +5,7 @@
 
 ---@diagnostic disable: undefined-global
 
-local lib, oldminor = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 11);
+local lib, oldminor = LibStub:NewLibrary('Krowi_WorldMapButtons-1.4', 12);
 
 if not lib then
 	return;
@@ -19,9 +19,9 @@ lib.IsForever = major <= 3 and WorldMapTrackingPinButtonMixin ~= nil;
 lib.HasNoOverlay = major <= 3 and not lib.IsForever;
 lib.IsMainline = major >= 11 or lib.IsForever;
 
--- Forever moves the map pin button to the top-left corner, so the buttons stack from there
+-- Forever owns the top-left map pin button; addon buttons stack below its reserved slot
 if lib.IsForever then
-	lib.AnchorPoint, lib.XOffset, lib.YOffset = "TOPLEFT", 3, 0;
+	lib.AnchorPoint, lib.XOffset, lib.YOffset = "TOPLEFT", 3, -32;
 else
 	lib.AnchorPoint, lib.XOffset, lib.YOffset = "TOPRIGHT", 4, -2;
 end
@@ -65,7 +65,7 @@ local function HookDefaultButtons()
 		if not lib.IsForever and IsTrackingOptionsButton(f) then
 			tinsert(lib.Buttons, f);
 		end
-		if WorldMapTrackingPinButtonMixin and f.OnLoad == WorldMapTrackingPinButtonMixin.OnLoad then
+		if not lib.IsForever and WorldMapTrackingPinButtonMixin and f.OnLoad == WorldMapTrackingPinButtonMixin.OnLoad then
 			tinsert(lib.Buttons, f);
 		end
 	end
@@ -125,15 +125,16 @@ if oldminor and oldminor == 3 then
 	end
 end
 
--- Older minors treated Forever as Classic Era: they adopted the tracking options button and parented buttons to the ScrollContainer
-if oldminor and oldminor < 11 and lib.IsForever and lib.Buttons then
+-- Older minors adopted Blizzard buttons on Forever; leave their layout to the client
+if oldminor and oldminor < 12 and lib.IsForever and lib.Buttons then
 	for i = #lib.Buttons, 1, -1 do
 		local button = lib.Buttons[i];
-		if IsTrackingOptionsButton(button) then
+		if IsTrackingOptionsButton(button) or (WorldMapTrackingPinButtonMixin and button.OnLoad == WorldMapTrackingPinButtonMixin.OnLoad) then
 			tremove(lib.Buttons, i);
 		elseif button:GetParent() == WorldMapFrame.ScrollContainer then
 			button:SetParent(WorldMapFrame);
 			button:SetFrameStrata("HIGH"); -- same strata as Blizzard's map buttons
 		end
 	end
+	lib.SetPoints();
 end
